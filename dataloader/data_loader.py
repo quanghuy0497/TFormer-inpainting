@@ -10,20 +10,20 @@ import math
 class CreateDataset(data.Dataset):
     def __init__(self, opt):
         self.opt = opt
-        self.img_paths, self.img_size = make_dataset(opt.img_file)
+        self.img_paths, self.labels, self.img_size = make_dataset(opt.img_file)
         # provides random file for training and testing
         if opt.mask_file != 'none':
-            self.mask_paths, self.mask_size = make_dataset(opt.mask_file)
+            self.mask_paths, self.labels, self.mask_size = make_dataset(opt.mask_file)
             if not self.opt.isTrain:
                 self.mask_paths = self.mask_paths * (max(1, math.ceil(self.img_size / self.mask_size)))
         self.transform = get_transform(opt)
 
     def __getitem__(self, index):
         # load image
-        img, img_path = self.load_img(index)
+        img, label, img_path = self.load_img(index)
         # load mask
         mask = self.load_mask(img, index)
-        return {'img': img, 'img_path': img_path, 'mask': mask}
+        return {'img': img, 'label': label, 'img_path': img_path, 'mask': mask}
 
     def __len__(self):
         return self.img_size
@@ -34,10 +34,11 @@ class CreateDataset(data.Dataset):
     def load_img(self, index):
         ImageFile.LOAD_TRUNCATED_IMAGES = True
         img_path = self.img_paths[index % self.img_size]
+        label = self.labels[index % self.img_size]
         img_pil = Image.open(img_path).convert('RGB')
         img = self.transform(img_pil)
         img_pil.close()
-        return img, img_path
+        return img, label, img_path
 
     def load_mask(self, img, index):
         """Load different mask types for training and testing"""

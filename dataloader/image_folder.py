@@ -1,5 +1,6 @@
 import os
 import os.path
+import pdb
 
 IMG_EXTENSIONS = [
     '.jpg', '.JPG', '.jpeg', '.JPEG',
@@ -11,45 +12,35 @@ def is_image_file(filename):
     return any(filename.endswith(extension) for extension in IMG_EXTENSIONS)
 
 
-def make_dataset(path_files):
-    if path_files.find('.txt') != -1:
-        paths, size = make_dataset_txt(path_files)
-    else:
-        paths, size = make_dataset_dir(path_files)
-
-    return paths, size
-
-
-def make_dataset_txt(files):
+def make_dataset(dir):
     """
-    :param path_files: the path of txt file that store the image paths
-    :return: image paths and sizes
+    dir: directory paths that store the image with the format:
+        directory/
+        ├── class_1
+        │   ├── img_1.jpg
+        │   ├── img_2.jpg
+        │   ├── ...
+        │   └── img-n.jpg
+        ├── class_2
+        │    ├── img_1.jpg
+        │    ├── img_2.jpg
+        │    ├── ...
+        │    └── img_n.jpg
+        └── ...        
+    return: image paths, label, and sizes of images
     """
+    
     img_paths = []
-
-    with open(files) as f:
-        paths = f.readlines()
-
-    for path in paths:
-        path = path.strip()
-        img_paths.append(path)
-
-    return img_paths, len(img_paths)
-
-
-def make_dataset_dir(dir):
-    """
-    :param dir: directory paths that store the image
-    :return: image paths and sizes
-    """
-    img_paths = []
+    labels = []
 
     assert os.path.isdir(dir), '%s is not a valid directory' % dir
 
     for root, _, fnames in os.walk(dir):
         for fname in sorted(fnames):
             if is_image_file(fname):
+                label = root[19:]
                 path = os.path.join(root, fname)
+                labels.append(label)
                 img_paths.append(path)
 
-    return img_paths, len(img_paths)
+    return img_paths, labels, len(img_paths)
