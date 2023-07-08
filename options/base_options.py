@@ -25,7 +25,7 @@ class BaseOptions():
         parser.add_argument('--mask_file', type=str, default='none', help='load test mask')
         parser.add_argument('--loadSize', type=int, default=[266, 266], help='scale images to this size')
         parser.add_argument('--fineSize', type=int, default=[256, 256], help='then crop to this size')
-        parser.add_argument('--resize_or_crop', type=str, default='resize_and_crop', help='scaling and cropping of images at load time [resize_and_crop|crop|]')
+        parser.add_argument('--resize_or_crop', type=str, default='resize', help='scaling and cropping of images at load time [resize_and_crop|resize|crop|]')
         parser.add_argument('--no_flip', action='store_true', help='if specified, do not flip the image for data augmentation')
         parser.add_argument('--no_rotation', action='store_true', help='if specified, do not rotation for data augmentation')
         parser.add_argument('--no_augment', action='store_true', help='if specified, do not augment the image for data augmentation')
@@ -66,14 +66,14 @@ class BaseOptions():
         self.print_options(opt)
 
         # set gpu ids
-        # str_ids = opt.gpu_ids.split(',')
-        # opt.gpu_ids = []
-        # for str_id in str_ids:
-        #     id = int(str_id)
-        #     if id >= 0:
-        #         opt.gpu_ids.append(id)
-        # if len(opt.gpu_ids):
-        #     torch.cuda.set_device(opt.gpu_ids[0])
+        str_ids = opt.gpu_ids.split(',')
+        opt.gpu_ids = []
+        for str_id in str_ids:
+            id = int(str_id)
+            if id >= 0:
+                opt.gpu_ids.append(id)
+        if len(opt.gpu_ids):
+            torch.cuda.set_device(opt.gpu_ids[0])
 
         self.opt = opt
 

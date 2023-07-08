@@ -20,7 +20,7 @@ def make_dataset(dir):
         │   ├── img_1.jpg
         │   ├── img_2.jpg
         │   ├── ...
-        │   └── img-n.jpg
+        │   └── img_n.jpg
         ├── class_2
         │    ├── img_1.jpg
         │    ├── img_2.jpg
