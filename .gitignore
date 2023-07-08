@@ -1,4 +1,6 @@
 data/BDD_OOD/*
-.DS_Store
+
+*.zip
 *.pyc
-tmp.py
+
+.DS_Store

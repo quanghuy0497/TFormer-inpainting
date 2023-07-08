@@ -35,12 +35,12 @@ def make_dataset(dir):
 
     assert os.path.isdir(dir), '%s is not a valid directory' % dir
 
-    for root, _, fnames in os.walk(dir):
-        for fname in sorted(fnames):
-            if is_image_file(fname):
-                label = root[19:]
-                path = os.path.join(root, fname)
-                labels.append(label)
-                img_paths.append(path)
+    for label in sorted(os.listdir(dir)):
+        if os.path.isdir(os.path.join(dir, label)):
+            for fname in sorted(os.listdir(os.path.join(dir, label))):
+                if is_image_file(fname):
+                    path = os.path.join(dir, label, fname)
+                    labels.append(label)
+                    img_paths.append(path)
 
     return img_paths, labels, len(img_paths)

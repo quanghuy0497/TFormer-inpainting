@@ -1,0 +1,16 @@
+name: TFM
+channels:
+  - defaults
+dependencies:
+  - pip
+  - python
+  - pip:
+    - matplotlib
+    - Pillow
+    - numpy
+    - pandas
+    - opencv-python
+    - json
+    - tqdm
+    - scipy
+    - einops
