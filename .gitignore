@@ -1,6 +1,8 @@
+__pycache__
+
 data/BDD_OOD/*
+checkpoints/*
 
-*.zip
+
 *.pyc
-
 .DS_Store

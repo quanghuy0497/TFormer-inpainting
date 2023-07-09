@@ -2,8 +2,6 @@ name: TFM
 channels:
   - defaults
 dependencies:
-  - pip
-  - python
   - pip:
     - matplotlib
     - Pillow
