@@ -34,20 +34,28 @@ def checkerboard_mask(img):
     num_blocks = 8
 
     num_channels = 3
-    inverse = False
     assert image_size[1] % num_blocks == 0, 'image_size must be divisible by num_blocks'
     block_len = int(image_size[1] // num_blocks)
     mask = torch.ones((1, num_blocks, num_blocks))
-    if inverse:
-        mask[:, ::2, ::2] = 0.
-        mask[:, 1::2, 1::2] = 0.
-    else:
-        mask[:,1::2, ::2] = 0.
-        mask[:,::2, 1::2] = 0.
+    mask[:,1::2, ::2] = 0.
+    mask[:,::2, 1::2] = 0.
     mask = mask.repeat_interleave(repeats=block_len, dim=1).repeat_interleave(repeats=block_len,dim=2)
     # print(mask.shape)
     return mask
-    
+
+def checkerboard_inverse_mask(img):
+    image_size = img.size()
+    num_blocks = 8
+
+    num_channels = 3
+    assert image_size[1] % num_blocks == 0, 'image_size must be divisible by num_blocks'
+    block_len = int(image_size[1] // num_blocks)
+    mask = torch.ones((1, num_blocks, num_blocks))
+    mask[:, ::2, ::2] = 0.
+    mask[:, 1::2, 1::2] = 0.
+    mask = mask.repeat_interleave(repeats=block_len, dim=1).repeat_interleave(repeats=block_len,dim=2)
+    # print(mask.shape)
+    return mask
 
 
 def center_mask(img):

@@ -14,7 +14,7 @@ class BaseOptions():
         # base define
         parser.add_argument('--name', type=str, default='BDD_OOD', help='name of the experiment.')
         parser.add_argument('--model', type=str, default='tformer', help='name of the model type. [tformer]')
-        parser.add_argument('--mask_type', type=int, default=[5],
+        parser.add_argument('--mask_type', type=int, default=[5, 6],
                             help='mask type, 0: center mask, 1:random regular mask, '
                             '2: random irregular mask from plc (cvpr 2019). 3: external irregular mask. 4: irregular mask from plc (iccv 2019) [0],[1,2],[2,3]')
         parser.add_argument('--checkpoints_dir', type=str, default='./checkpoints', help='models are save here')
