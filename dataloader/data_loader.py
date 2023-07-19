@@ -59,6 +59,9 @@ class CreateDataset(data.Dataset):
 
         if mask_type == 4:
             return task.random_freefrom_mask(img)
+        
+        if mask_type == 5:
+            return task.checkerboard_mask(img)
 
         # external mask from "Image Inpainting for Irregular Holes Using Partial Convolutions (ECCV18)"
         if mask_type == 3:

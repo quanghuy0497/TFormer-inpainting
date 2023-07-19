@@ -26,7 +26,28 @@ def random_regular_mask(img):
         range_x = x + random.randint(int(s[1] / (N_mask + 7)), int(s[1] - x))
         range_y = y + random.randint(int(s[2] / (N_mask + 7)), int(s[2] - y))
         mask[:, int(x):int(range_x), int(y):int(range_y)] = 0
+    
     return mask
+
+def checkerboard_mask(img):
+    image_size = img.size()
+    num_blocks = 8
+
+    num_channels = 3
+    inverse = False
+    assert image_size[1] % num_blocks == 0, 'image_size must be divisible by num_blocks'
+    block_len = int(image_size[1] // num_blocks)
+    mask = torch.ones((1, num_blocks, num_blocks))
+    if inverse:
+        mask[:, ::2, ::2] = 0.
+        mask[:, 1::2, 1::2] = 0.
+    else:
+        mask[:,1::2, ::2] = 0.
+        mask[:,::2, 1::2] = 0.
+    mask = mask.repeat_interleave(repeats=block_len, dim=1).repeat_interleave(repeats=block_len,dim=2)
+    # print(mask.shape)
+    return mask
+    
 
 
 def center_mask(img):
@@ -39,7 +60,7 @@ def center_mask(img):
     range_x = int(size[1] * 3 / 4)
     range_y = int(size[2] * 3 / 4)
     mask[:, x:range_x, y:range_y] = 0
-
+    # print(mask.shape)
     return mask
 
 
