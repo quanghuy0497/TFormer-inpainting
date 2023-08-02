@@ -19,7 +19,7 @@ class BaseOptions():
                             '2: random irregular mask from plc (cvpr 2019). 3: external irregular mask. 4: irregular mask from plc (iccv 2019) [0],[1,2],[2,3]')
         parser.add_argument('--checkpoints_dir', type=str, default='./checkpoints', help='models are save here')
         parser.add_argument('--which_iter', type=str, default='latest', help='which iterations to load')
-        parser.add_argument('--gpu_ids', type=str, default='2', help='gpu ids: e.g. 0, 1, 2 use -1 for CPU')
+        parser.add_argument('--gpu_ids', type=str, default='0', help='gpu ids: e.g. 0, 1, 2 use -1 for CPU')
 
         parser.add_argument('--img_file', type=str, default='data/BDD_OOD/train/', help='training and testing dataset')
         parser.add_argument('--mask_file', type=str, default='none', help='load test mask')
@@ -29,8 +29,8 @@ class BaseOptions():
         parser.add_argument('--no_flip', action='store_true', help='if specified, do not flip the image for data augmentation')
         parser.add_argument('--no_rotation', action='store_true', help='if specified, do not rotation for data augmentation')
         parser.add_argument('--no_augment', action='store_true', help='if specified, do not augment the image for data augmentation')
-        parser.add_argument('--batchSize', type=int, default=6, help='input batch size')
-        parser.add_argument('--nThreads', type=int, default=6, help='# threads for loading data')
+        parser.add_argument('--batchSize', type=int, default=2, help='input batch size')
+        parser.add_argument('--nThreads', type=int, default=2, help='# threads for loading data')
         parser.add_argument('--no_shuffle', action='store_true',help='if true, takes images serial')
 
         # display parameter define

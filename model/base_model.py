@@ -142,10 +142,12 @@ class BaseModel():
 
         for i in range(save_data.size(0)):
             print('process image ...... %s' % img_paths[i])
-            short_path = ntpath.basename(img_paths[i])  # get image path
+            img = img_paths[i]
+            short_path = ntpath.basename(img)  # get image path
             name = os.path.splitext(short_path)[0]
+            label = ntpath.basename(img[:img.rindex('/')])
             if type(score) == type(None):
-                img_name = '%s.png' % (name)
+                img_name = '%s_%s.png' % (label, name)
             else:
                 # d_score = score[i].mean()
                 # img_name = '%s_%s_%s.png' % (name, data_name, str(round(d_score.item(), 3)))

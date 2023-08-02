@@ -9,7 +9,7 @@ if __name__ == '__main__':
     # get training options
     opt = TrainOptions().parse()
     if opt.continue_train:
-        op.niter = int(op.niter/2)
+        opt.niter = int(opt.niter/2)
     # create a dataset
     dataset = dataloader(opt)
     dataset_size = len(dataset) * opt.batchSize

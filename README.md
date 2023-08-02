@@ -3,7 +3,7 @@ This is the code for ACM multimedia 2022 “T-former: An Efficient Transformer f
 # visualization during training
 `python - m visdom.server`
 # train:
-`python train.py --no_flip --no_rotation --no_augment --img_file your_data --lr 1e-4`
+`python train.py --no_flip --no_rotation --no_augment --img_file your_data img_`
 # fine_tune:
 `python train.py --no_flip --no_rotation --no_augment --img_file your_data --lr 1e-5 --continue_train`
 # test:

@@ -1,0 +1,1 @@
+python train.py --lr 1e-4 && python train.py --lr 1e-5 --continue_train
