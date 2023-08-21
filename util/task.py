@@ -31,7 +31,7 @@ def random_regular_mask(img):
 
 def checkerboard_mask(img):
     image_size = img.size()
-    num_blocks = 8
+    num_blocks = 4
 
     num_channels = 3
     assert image_size[1] % num_blocks == 0, 'image_size must be divisible by num_blocks'

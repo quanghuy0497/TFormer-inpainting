@@ -1,0 +1,1 @@
+python test.py --batchSize 1 --img_file data/BDD_OOD/test/
